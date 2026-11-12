@@ -1,102 +1,28 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Jejak Deployment - Praktikum Komputasi Awan</title>
-<style>
-  :root{
-    --ink:#10243B; --ink-soft:#44566B; --bg:#E9F0F5; --panel:#FFFFFF;
-    --line:#C5D3DF; --accent:#E8892B; --ok:#1F8A5B;
-  }
-  @media (prefers-color-scheme: dark){
-    :root{ --ink:#E6EEF5; --ink-soft:#9DB0C3; --bg:#0F1C2B; --panel:#16283B; --line:#2C4258; --accent:#F2A33A; --ok:#4CC38A; }
-  }
-  *{box-sizing:border-box}
-  body{margin:0;background:var(--bg);color:var(--ink);
-       font-family:"Trebuchet MS","Segoe UI",system-ui,sans-serif;line-height:1.6}
-  main{max-width:860px;margin:0 auto;padding:48px 20px 64px}
-  h1{font-family:Georgia,"Times New Roman",serif;font-size:clamp(2rem,6vw,3.2rem);line-height:1.1;margin:0 0 12px}
-  h2{font-family:Georgia,serif;font-size:1.4rem;margin:40px 0 14px}
-  p{max-width:62ch;color:var(--ink-soft);margin:0 0 12px}
-  .badge{display:inline-block;background:var(--accent);color:#1b1305;font-weight:700;
-         padding:3px 12px;border-radius:999px;font-size:.85rem;margin-bottom:16px}
-  .pipeline{display:flex;flex-wrap:wrap;gap:0;margin:28px 0;border:2px solid var(--ink);border-radius:10px;overflow:hidden}
-  .node{flex:1 1 180px;padding:18px;background:var(--panel);border-right:2px solid var(--ink)}
-  .node:last-child{border-right:0}
-  .node b{display:block;font-size:1.05rem}
-  .node span{color:var(--ink-soft);font-size:.9rem}
-  .node.live{background:var(--ink)}
-  .node.live b,.node.live span{color:var(--bg)}
-  @media(max-width:600px){.node{border-right:0;border-bottom:2px solid var(--ink)}.node:last-child{border-bottom:0}}
-  dl{display:grid;grid-template-columns:max-content 1fr;gap:8px 20px;background:var(--panel);
-     border:1px solid var(--line);border-radius:8px;padding:18px;margin:0}
-  dt{color:var(--ink-soft)} dd{margin:0;font-weight:700;word-break:break-all}
-  .ok{color:var(--ok)}
-  ul.log{list-style:none;padding:0;margin:0;border-left:3px solid var(--line)}
-  ul.log li{padding:6px 0 6px 16px;position:relative}
-  ul.log li::before{content:"";position:absolute;left:-8px;top:15px;width:13px;height:13px;border-radius:50%;
-                    background:var(--ok);border:2px solid var(--bg)}
-  button{font:inherit;font-weight:700;background:var(--ink);color:var(--bg);border:0;border-radius:8px;
-         padding:10px 18px;cursor:pointer}
-  button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
-  #msg{margin-top:12px;min-height:1.6em;font-weight:700}
-  footer{margin-top:48px;color:var(--ink-soft);font-size:.9rem;border-top:1px solid var(--line);padding-top:16px}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Web Statis di Azure</title>
+  <style>
+    body{font-family:Arial,sans-serif;background:#eef3f8;color:#10243b;margin:0;padding:40px 20px;line-height:1.6}
+    .box{max-width:700px;margin:0 auto;background:#fff;padding:32px;border-radius:10px;border:1px solid #c5d3df}
+    h1{margin-top:0}
+    table{border-collapse:collapse;width:100%}
+    td{border:1px solid #c5d3df;padding:8px}
+    td:first-child{width:35%;background:#f3f7fa;font-weight:bold}
+  </style>
 </head>
 <body>
-<main>
-  <span class="badge">Versi 1.0</span>
-  <h1>Jejak Deployment Website Statis</h1>
-  <p>Halaman ini ditulis di komputer lokal, disimpan di GitHub, lalu disajikan oleh Azure Static Web Apps. Tidak ada server yang perlu saya atur sendiri.</p>
-
-  <div class="pipeline" aria-label="Alur deployment">
-    <div class="node"><b>1. Lokal</b><span>index.html dicek di browser dan VS Code</span></div>
-    <div class="node"><b>2. GitHub</b><span>Repository private menyimpan kode</span></div>
-    <div class="node live"><b>3. Azure</b><span>Static Web Apps menayangkan ke internet</span></div>
+  <div class="box">
+    <h1>Website Statis di Microsoft Azure</h1>
+    <p>Halaman ini berhasil di-deploy menggunakan Azure Static Web Apps dan GitHub.</p>
+    <table>
+      <tr><td>Nama</td><td>NAMA LENGKAP</td></tr>
+      <tr><td>NIM</td><td>000000000</td></tr>
+      <tr><td>Mata Kuliah</td><td>Komputasi Awan</td></tr>
+      <tr><td>Versi</td><td>1.0</td></tr>
+    </table>
   </div>
-
-  <h2>Bukti halaman ini sedang online</h2>
-  <dl>
-    <dt>Alamat yang dibuka</dt><dd id="host">-</dd>
-    <dt>Protokol</dt><dd id="proto">-</dd>
-    <dt>Dimuat pada</dt><dd id="time">-</dd>
-    <dt>Status</dt><dd id="status">-</dd>
-  </dl>
-
-  <h2>Catatan proses</h2>
-  <ul class="log">
-    <li>Mengunduh dan menjalankan index.html di lokal</li>
-    <li>Membuat repository private di GitHub dan mengunggah file</li>
-    <li>Membuat Static Web App di portal Azure (plan Free, region East Asia)</li>
-    <li>Memperbaiki workflow GitHub Actions sampai build berwarna hijau</li>
-  </ul>
-
-  <h2>Coba interaksinya</h2>
-  <p>Tombol ini berjalan di browser Anda, bukan di server. Static Web Apps hanya mengirim file HTML, CSS, dan JavaScript.</p>
-  <button id="btn" type="button">Cek koneksi ke Azure</button>
-  <div id="msg" role="status" aria-live="polite"></div>
-
-  <footer>Dibuat dengan HTML, CSS, dan JavaScript murni.</footer>
-</main>
-
-<script>
-  var h = location.hostname || "file lokal (belum online)";
-  var online = location.protocol.indexOf("http") === 0;
-  document.getElementById("host").textContent = h;
-  document.getElementById("proto").textContent = location.protocol.replace(":","").toUpperCase();
-  document.getElementById("time").textContent = new Date().toLocaleString("id-ID",{dateStyle:"full",timeStyle:"medium"});
-  var st = document.getElementById("status");
-  st.textContent = online ? "Online di cloud" : "Masih berjalan di komputer lokal";
-  if(online) st.className = "ok";
-  document.getElementById("btn").addEventListener("click", function(){
-    var t0 = performance.now();
-    fetch(location.href,{cache:"no-store"}).then(function(){
-      document.getElementById("msg").textContent = "Server menjawab dalam " + Math.round(performance.now()-t0) + " ms";
-    }).catch(function(){
-      document.getElementById("msg").textContent = "Tidak bisa menghubungi server. Buka lewat URL Azure, bukan file lokal.";
-    });
-  });
-</script>
 </body>
 </html>
